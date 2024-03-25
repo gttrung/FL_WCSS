@@ -1,0 +1,90 @@
+{
+    "name": "NestedUnet",
+    "n_gpu": 1,
+    "use_synch_bn": true,
+
+    "arch": {
+        "type": "NestedUnet",
+        "args": {
+            "backbone": "resnet34",
+            "freeze_bn": false,
+            "freeze_backbone": false,
+            "pretrained": true
+        }
+    },
+
+    "dataset_train": {
+        "type": "RiceCrops",
+        "args":{
+            "data_dir": "./Data/Weeds_Crops_Masked_Data",
+            "batch_size": 4,
+            "base_size": 400,
+            "crop_size": 384,
+            "augment": true,
+            "shuffle": true,
+            "scale": true,
+            "flip": true,
+            "rotate": true,
+            "blur": false,
+            "split": "train",
+            "num_workers": 8
+        }
+    },
+
+    "dataset_val": {
+        "type": "RiceCrops",
+        "args":{
+            "data_dir": "./Data/Weeds_Crops_Masked_Data",
+            "batch_size": 4,
+            "crop_size": 480,
+            "val": true,
+            "split": "valid",
+            "num_workers": 8
+        }
+    },
+
+    "dataset_test": {
+        "type": "RiceCrops",
+        "args":{
+            "data_dir": "./Data/Weeds_Crops_Masked_Data",
+            "batch_size": 4,
+            "crop_size": 480,
+            "val": true,
+            "split": "test",
+            "num_workers": 8
+        }
+    },
+    
+    "optimizer": {
+        "type": "SGD",
+        "differential_lr": true,
+        "args":{
+            "lr": 0.01,
+            "weight_decay": 1e-4,
+            "momentum": 0.9
+        }
+    },
+
+    "loss": "CrossEntropyLoss2d",
+    "ignore_index": 255,
+    "lr_scheduler": {
+        "type": "Poly",
+        "args": {}
+    },
+
+    "trainer": {
+        "epochs": 80,
+        "save_dir": "saved/",
+        "save_period": 10,
+  
+        "monitor": "max Mean_IoU",
+        "early_stop": 10,
+        
+        "tensorboard": false,
+        "log_dir": "saved/runs",
+        "log_per_iter": 20,
+
+        "val": true,
+        "val_per_epochs": 5
+    }
+}
