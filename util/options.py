@@ -15,9 +15,9 @@ def args_parser():
 
     parser.add_argument('--num_users', type=int, default=100, help="number of uses: K")
     parser.add_argument('--num_new_users', type=int, default=0, help="number of new users: Q")
-    parser.add_argument('--local_bs', type=int, default=6, help="local batch size: B")
+    parser.add_argument('--local_bs', type=int, default=4, help="local batch size: B")
     parser.add_argument('--large_local_bs', type=int, default=30, help="large local batch size: LB")
-    parser.add_argument('--normal_local_bs', type=int, default=10, help="normal local batch size: NB")
+    parser.add_argument('--normal_local_bs', type=int, default=4, help="normal local batch size: NB")
     parser.add_argument('--lr', type=float, default=0.03, help="learning rate")
     parser.add_argument('--momentum', type=float, default=0.5, help="SGD momentum, default 0.5")
     parser.add_argument('--beta', type=float, default=0, help="coefficient for local proximal, 0 for fedavg, 1 for fedprox, 5 for noise fl")

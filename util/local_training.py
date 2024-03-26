@@ -138,7 +138,7 @@ class GlobalTest(object):
     def valid(self, net):
         self._reset_metrics()
         net.eval()
-        test_loader = torch.utils.data.DataLoader(dataset=self.test_dataset, batch_size=10, shuffle=False)
+        test_loader = torch.utils.data.DataLoader(dataset=self.test_dataset, batch_size=4, shuffle=False)
         with torch.no_grad():
             for images, targets in test_loader:
                 images = images.to(self.args.device)
