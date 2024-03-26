@@ -159,7 +159,6 @@ if __name__ == '__main__':
 
     # ------------------------------- second stage training -------------------------------
     
-    args.local_bs = args.normal_local_bs
     if args.fine_tuning:
         m = max(int(args.frac2 * args.num_users), 1)  # num_select_clients
         m = min(m, args.num_users)
